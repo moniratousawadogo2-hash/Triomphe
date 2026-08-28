@@ -14,9 +14,12 @@ import {
   LayoutGrid,
   Sparkles,
   Users,
-  CreditCard
+  CreditCard,
+  Download,
+  WifiOff
 } from 'lucide-react';
 import { formatCurrency } from '../utils/currency';
+import { usePWA } from '../hooks/usePWA';
 
 export const Navbar: React.FC = () => {
   const {
@@ -33,6 +36,15 @@ export const Navbar: React.FC = () => {
     tables,
     resetDemoData,
   } = useRestaurant();
+
+  const {
+    isInstallable,
+    isInstalled,
+    isStandalone,
+    isOffline,
+    isIOS,
+    promptInstall
+  } = usePWA();
 
   // Low stock counter
   const lowStockCount = ingredients.filter((i) => i.currentStock <= i.minThreshold).length;
@@ -104,8 +116,29 @@ export const Navbar: React.FC = () => {
             )}
           </div>
 
-          {/* Right actions: Role switcher, mobile toggle, audio, reset */}
+          {/* Right actions: Role switcher, mobile toggle, PWA install, audio, reset */}
           <div className="flex items-center gap-2">
+            {/* PWA Install Button (if not already installed standalone) */}
+            {!isStandalone && (
+              <button
+                id="btn-pwa-install-nav"
+                onClick={promptInstall}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 transition-all cursor-pointer"
+                title="Installer TriompheResto comme application autonome (PWA)"
+              >
+                <Download className="w-3.5 h-3.5 text-amber-400" />
+                <span className="hidden md:inline">Installer App</span>
+              </button>
+            )}
+
+            {/* Standalone Installed Badge */}
+            {isStandalone && (
+              <span className="hidden md:inline-flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-bold bg-stone-800 text-stone-300 border border-stone-700">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                PWA Active
+              </span>
+            )}
+
             {/* Mobile View Toggle */}
             <button
               id="btn-toggle-mobile-mode"

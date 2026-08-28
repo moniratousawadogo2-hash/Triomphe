@@ -14,6 +14,7 @@ import { MenuRecipes } from './components/MenuRecipes';
 import { BillingTab } from './components/BillingTab';
 import { DashboardAnalytics } from './components/DashboardAnalytics';
 import { ToastContainer } from './components/ToastContainer';
+import { PWAInstallPrompt } from './components/PWAInstallPrompt';
 
 const MainContent: React.FC = () => {
   const { activeTab } = useRestaurant();
@@ -35,6 +36,7 @@ export default function App() {
   return (
     <RestaurantProvider>
       <div className="min-h-screen bg-stone-100 text-stone-900 flex flex-col selection:bg-amber-500 selection:text-white font-sans">
+        <PWAInstallPrompt />
         <Navbar />
         <MainContent />
         <ToastContainer />
