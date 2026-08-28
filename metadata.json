@@ -1,0 +1,6 @@
+{
+  "name": "TriompheResto - Gestion Restaurant & Stocks",
+  "description": "Logiciel complet de gestion pour le restaurant TriompheResto avec prise de commande mobile serveur, écran cuisine KDS, plan de salle et suivi des stocks en temps réel avec déduction automatique des ingrédients.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
